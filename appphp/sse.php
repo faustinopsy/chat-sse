@@ -8,14 +8,14 @@ header('Cache-Control: no-cache');
 
 session_write_close();
 
-$messageManager = new MessageManager();
+$chat = new Chat();
 $lastId = isset($_GET['lastId']) ? (int)$_GET['lastId'] : 0;
 
 while (true) {
     if (connection_aborted()) {
         break;
     }
-    $messages = $messageManager->getMessages($lastId);
+    $messages = $chat->getMessages($lastId);
     if (count($messages) > 0) {
         $lastMessage = end($messages);
         $lastId = $lastMessage['id'];
