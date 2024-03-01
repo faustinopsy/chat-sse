@@ -1,7 +1,7 @@
 <?php
 require_once 'Database.php';
 
-class MessageManager {
+class Chat {
     private $conn;
 
     public function __construct() {
