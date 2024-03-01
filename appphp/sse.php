@@ -7,7 +7,6 @@ header('Content-Type: text/event-stream');
 header('Cache-Control: no-cache');
 
 session_write_close();
-
 $chat = new Chat();
 $lastId = isset($_GET['lastId']) ? (int)$_GET['lastId'] : 0;
 

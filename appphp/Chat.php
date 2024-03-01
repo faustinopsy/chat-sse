@@ -9,14 +9,14 @@ class Chat {
         $this->conn = $database->getConnection();
     }
 
-    public function sendMessage($message) {
-        $query = "INSERT INTO messages (message) VALUES (:message)";
+    public function sendMessage($message,$user) {
+        $query = "INSERT INTO messages (message,user) VALUES (:message,:user)";
         $stmt = $this->conn->prepare($query);
 
         $message=htmlspecialchars(strip_tags($message));
 
         $stmt->bindParam(":message", $message);
-
+        $stmt->bindParam(":user", $user);
         if($stmt->execute()) {
             return true;
         }
@@ -25,7 +25,7 @@ class Chat {
     }
 
     public function getMessages($lastId = 0) {
-        $query = "SELECT id, message FROM messages WHERE id > :lastId ORDER BY id DESC";
+        $query = "SELECT id, message, user FROM messages WHERE id > :lastId ORDER BY id DESC";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(":lastId", $lastId, PDO::PARAM_INT);
