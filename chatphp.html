@@ -50,10 +50,15 @@ eventSource.onmessage = function(event) {
 function addMessageToDOM(message) {
     const messagesElement = document.getElementById('messages');
     const messageElement = document.createElement('div');
-    console.log(message)
     if (!messagesElement.innerHTML.includes(message.id)) {
         const messageElement = document.createElement('div');
-        messageElement.textContent = `${message.user} : ${message.message}`;
+        if(message.user == user){
+            messageElement.style.backgroundColor ='green';
+            messageElement.textContent = `Nº ${message.id}  :  ${message.user} : ${message.message}`;
+        }else{
+            messageElement.textContent = `Nº ${message.id}  :  ${message.user} : ${message.message}`;
+        }
+            
         messagesElement.appendChild(messageElement); 
     }
 }
