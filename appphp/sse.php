@@ -1,0 +1,33 @@
+<?php
+require_once 'MessageManager.php';
+
+set_time_limit(0);
+
+header('Content-Type: text/event-stream');
+header('Cache-Control: no-cache');
+
+session_write_close();
+
+$messageManager = new MessageManager();
+$lastId = isset($_GET['lastId']) ? (int)$_GET['lastId'] : 0;
+
+while (true) {
+    if (connection_aborted()) {
+        break;
+    }
+    $messages = $messageManager->getMessages($lastId);
+    if (count($messages) > 0) {
+        $lastMessage = end($messages);
+        $lastId = $lastMessage['id'];
+
+        echo "id: {$lastId}\n";
+        echo "data: " . json_encode($messages) . "\n\n";
+    } else {
+        echo ": heartbeat\n\n";
+    }
+
+    ob_flush();
+    flush();
+    sleep(1);
+}
+

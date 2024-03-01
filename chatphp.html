@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chat em Tempo Real</title>
+<style>
+    #messages {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        height: 200px;
+        overflow-y: scroll;
+    }
+</style>
+</head>
+<body>
+
+<div id="messages"></div>
+
+<form id="messageForm">
+    <input type="text" id="messageInput" placeholder="Digite sua mensagem" required>
+    <button type="submit">Enviar</button>
+</form>
+
+<script>
+let lastId = 0;
+
+const eventSource = new EventSource('appphp/sse.php');
+
+eventSource.onmessage = function(event) {
+    const messages = JSON.parse(event.data);
+    messages.forEach(msg => {
+        addMessageToDOM(msg.message);
+        lastId = msg.id; 
+    });
+};
+
+function addMessageToDOM(message) {
+    const messagesElement = document.getElementById('messages');
+    const messageElement = document.createElement('div');
+    if (!messagesElement.innerHTML.includes(message)) {
+        const messageElement = document.createElement('div');
+        messageElement.textContent = message;
+        messagesElement.appendChild(messageElement); 
+    }
+}
+
+document.getElementById('messageForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const messageInput = document.getElementById('messageInput');
+    const message = messageInput.value;
+
+    fetch('appphp/send_message.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({message: message})
+    })
+    .then(response => response.text())
+    .then(() => {
+        messageInput.value = ''; 
+    })
+    .catch(error => console.error('Erro ao enviar mensagem:', error));
+});
+</script>
+
+</body>
+</html>
