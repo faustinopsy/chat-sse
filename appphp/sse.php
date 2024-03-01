@@ -1,5 +1,5 @@
 <?php
-require_once 'MessageManager.php';
+require_once 'Chat.php';
 
 set_time_limit(0);
 
@@ -23,7 +23,7 @@ while (true) {
         echo "id: {$lastId}\n";
         echo "data: " . json_encode($messages) . "\n\n";
     } else {
-        echo ": heartbeat\n\n";
+        echo ": lol\n\n";
     }
 
     ob_flush();
