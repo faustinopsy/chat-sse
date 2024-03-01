@@ -2,7 +2,7 @@ DB_CONFIG = {
     'host': 'localhost',
     'port': 3306,
     'user': 'root',
-    'password': 'root123',
+    'password': 'root',
     'db': 'a01_teste',
 }
 

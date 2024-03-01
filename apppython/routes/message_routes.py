@@ -9,7 +9,7 @@ router = APIRouter()
 
 @router.post("/send_message/")
 async def send_message(message_body: Message):
-    await insert_message(message_body.message)
+    await insert_message(message_body.message,message_body.user)
     return {"message": "Message sent successfully."}
 
 async def event_generator():
@@ -18,7 +18,7 @@ async def event_generator():
         new_messages = await get_new_messages(last_id)
         if new_messages:
             for msg in new_messages:
-                yield f"data: {json.dumps(msg['message'])}\n\n"
+                yield f"data: {json.dumps(msg)}\n\n"
                 last_id = msg['id']
         await asyncio.sleep(1)
 

@@ -24,19 +24,38 @@
 
 <script>
 let lastId = 0;
-
+const consoa = ['b','c','d','f','g','h','j','k','_'];
+const vogais = ['a','e','i','o','u'];
+let user='';
+if(!localStorage.getItem('user')){
+    for(let i=0; i<=vogais.length; i++){
+        user += consoa[Math.floor(Math.random() * consoa.length)];
+        user += vogais[Math.floor(Math.random() * vogais.length)];
+    }
+    localStorage.setItem('user',user);
+}else{
+    user = localStorage.getItem('user');
+}
 const eventSource = new EventSource('http://127.0.0.1:8000/events/');
 eventSource.onmessage = function(event) {
     const data = JSON.parse(event.data);
-    addMessageToDOM(data);
+        addMessageToDOM(data);  
 
 };
 
-function addMessageToDOM(message) {
+function addMessageToDOM(data) {
     const messagesElement = document.getElementById('messages');
     const messageElement = document.createElement('div');
-    messageElement.textContent = message;
-    messagesElement.innerHTML += message+'<br>';
+    if (!messagesElement.innerHTML.includes(data.id)) {
+        const messageElement = document.createElement('div');
+        if(data.user == user){
+            messageElement.style.backgroundColor ='green';
+            messageElement.textContent = `Nº ${data.id}  :  ${data.user} : ${data.message}`;
+        }else{
+            messageElement.textContent = `Nº ${data.id}  :  ${data.user} : ${data.message}`;
+        }
+        messagesElement.appendChild(messageElement); 
+    }
 }
 
 document.getElementById('messageForm').addEventListener('submit', function(e) {
