@@ -22,6 +22,7 @@ class Database {
 CREATE TABLE `messages` (
   `id` int NOT NULL AUTO_INCREMENT,
   `message` text NOT NULL,
+  `usuario` varchar(50) NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 )

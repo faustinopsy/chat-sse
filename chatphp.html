@@ -52,11 +52,11 @@ function addMessageToDOM(message) {
     const messageElement = document.createElement('div');
     if (!messagesElement.innerHTML.includes(message.id)) {
         const messageElement = document.createElement('div');
-        if(message.user == user){
+        if(message.usuario == user){
             messageElement.style.backgroundColor ='green';
-            messageElement.textContent = `Nº ${message.id}  :  ${message.user} : ${message.message}`;
+            messageElement.textContent = `Nº ${message.id}  :  ${message.usuario} : ${message.message}`;
         }else{
-            messageElement.textContent = `Nº ${message.id}  :  ${message.user} : ${message.message}`;
+            messageElement.textContent = `Nº ${message.id}  :  ${message.usuario} : ${message.message}`;
         }
             
         messagesElement.appendChild(messageElement); 

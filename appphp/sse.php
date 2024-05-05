@@ -21,9 +21,7 @@ while (true) {
 
         echo "id: {$lastId}\n";
         echo "data: " . json_encode($messages) . "\n\n";
-    } else {
-        echo ": lol\n\n";
-    }
+    } 
 
     ob_flush();
     flush();
