@@ -60,3 +60,5 @@ pip install -r requeriments.txt
 python main.py
 
 ````
+
+<img src="chat.PNG">
