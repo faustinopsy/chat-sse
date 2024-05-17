@@ -1,5 +1,5 @@
 import aiomysql
-from config import DB_CONFIG
+from database.config import DB_CONFIG
 
 async def insert_message(message: str, user: str):
     async with aiomysql.connect(**DB_CONFIG) as conn:

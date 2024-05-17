@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from config import ORIGINS
+from database.config import ORIGINS
 from fastapi.middleware.cors import CORSMiddleware
 from routes.message_routes import router as message_router
 

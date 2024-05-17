@@ -2,8 +2,8 @@ from fastapi import APIRouter
 from starlette.responses import StreamingResponse
 import json
 import asyncio
-from models import Message
-from database import insert_message, get_new_messages
+from models.message import Message
+from database.database import insert_message, get_new_messages
 
 router = APIRouter()
 
