@@ -45,11 +45,13 @@ Configuração do Banco de Dados
 Crie o banco de dados e a tabela de mensagens:
 
 ```
-CREATE TABLE messages (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    message TEXT NOT NULL,
-    usuario VARCHAR(50) NOT NULL
-);
+CREATE TABLE `messages` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `message` text NOT NULL,
+  `usuario` varchar(50) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+)
 
 ```
 ## executar o servidor python
