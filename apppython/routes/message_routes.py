@@ -9,8 +9,9 @@ router = APIRouter()
 
 @router.post("/send_message/")
 async def send_message(message_body: Message):
-    await insert_message(message_body.message,message_body.user)
-    return {"message": "Message sent successfully."}
+    print(message_body)
+    await insert_message(message_body.message,message_body.usuario)
+    return {"message": "mensagem enviada."}
 
 async def event_generator():
     last_id = 0

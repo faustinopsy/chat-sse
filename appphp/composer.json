@@ -1,0 +1,16 @@
+{
+    "name": "chat/app",
+    "description": "chat observador",
+    "autoload": {
+        "psr-4": {
+            "Chat\\App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "faustinopsy",
+            "email": "rodrigohipnose@gmail.com"
+        }
+    ],
+    "require": {}
+}

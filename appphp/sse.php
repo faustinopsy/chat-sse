@@ -1,5 +1,7 @@
 <?php
-require_once 'Chat.php';
+
+require 'vendor/autoload.php';
+use Chat\App\Chat;
 
 set_time_limit(0);
 

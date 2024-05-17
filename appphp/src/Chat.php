@@ -1,6 +1,7 @@
 <?php
-require_once 'Database.php';
-
+namespace Chat\App;
+use Chat\App\Database;
+use PDO;
 class Chat {
     private $conn;
 
@@ -34,4 +35,4 @@ class Chat {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
-?>
+

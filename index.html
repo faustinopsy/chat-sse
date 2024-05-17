@@ -39,20 +39,20 @@ if(!localStorage.getItem('user')){
 const eventSource = new EventSource('http://127.0.0.1:8000/events/');
 eventSource.onmessage = function(event) {
     const data = JSON.parse(event.data);
-        addMessageToDOM(data);  
+        adicionarLista(data);  
 
 };
 
-function addMessageToDOM(data) {
+function adicionarLista(data) {
     const messagesElement = document.getElementById('messages');
     const messageElement = document.createElement('div');
     if (!messagesElement.innerHTML.includes(data.id)) {
         const messageElement = document.createElement('div');
-        if(data.user == user){
+        if(data.usuario == user){
             messageElement.style.backgroundColor ='green';
-            messageElement.textContent = `Nº ${data.id}  :  ${data.user} : ${data.message}`;
+            messageElement.textContent = `Nº ${data.id}  :  ${data.usuario} : ${data.message}`;
         }else{
-            messageElement.textContent = `Nº ${data.id}  :  ${data.user} : ${data.message}`;
+            messageElement.textContent = `Nº ${data.id}  :  ${data.usuario} : ${data.message}`;
         }
         messagesElement.appendChild(messageElement); 
     }
@@ -68,7 +68,7 @@ document.getElementById('messageForm').addEventListener('submit', function(e) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({message: message})
+        body: JSON.stringify({message: message, usuario: user})
     })
     .then(response => response.text())
     .then(() => {

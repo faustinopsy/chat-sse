@@ -1,5 +1,7 @@
 <?php
-require_once 'Chat.php';
+
+require 'vendor/autoload.php';
+use Chat\App\Chat;
 
 header('Content-Type: application/json');
 

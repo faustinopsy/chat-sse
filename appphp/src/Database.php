@@ -1,9 +1,13 @@
 <?php
+namespace Chat\App;
+use PDO;
+use PDOException;
+
 class Database {
     private $host = "localhost";
     private $db_name = "a01_teste";
     private $username = "root";
-    private $password = "root";
+    private $password = "usbw";
     public $conn;
 
     public function getConnection() {
